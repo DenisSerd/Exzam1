@@ -24,25 +24,6 @@
 //
 //
 //
-const objectSort = {
-    sortBy:'',
-    sortDir:"ask",
-    searchText:'чай',
-    year:'',
-    month:''
-}
-const searchTransactions = (arr, obj) => {
-    const arr2 =[];
-    arr.filter(item => {item.category == obj.searchText})
-    switch (obj.sortBy){
-        case "ask": arr2.sort((a, b) {a-b});
-        break;
-        case "desk": arr2.sort((a, b) {b-a});
-        break;
-        default: arr2.sort((a, b) {a-b});
-    }
-}
-
 
 const a = [
     {
@@ -795,4 +776,27 @@ const a = [
         "updatedAt": "2022-09-26T15:57:51.295Z",
         "__v": 0
     }];
+
+const searchObject = {
+    sortBy: 'category',
+    sortDir: 'desk',
+    searchText: "Даша",
+    year: 2022,
+    month: 9
+}
+const searchTransactions = (arr,obj) => {
+    if (Object.keys(obj).length === 0) {
+        return arr;
+    }
+    let sortFunction;
+    if(obj.sortDir === "desk") {
+        sortFunction = (a, b) => a.split[0][obj.sortBy].localeCompare(b.split[0][obj.sortBy]);
+    } else {
+        sortFunction = (a, b) => b.split[0][obj.sortBy].localeCompare(a.split[0][obj.sortBy]);
+    }
+    return arr.filter(item => (obj.searchText ? item.split[0].accountName === obj.searchText : true)
+      && ((obj.year ? item.split[0].year === obj.year : true))
+      && ((obj.month ? item.split[0].month === obj.month : true)))
+      .sort(sortFunction)}
+console.log (searchTransactions(a,searchObject))
 
