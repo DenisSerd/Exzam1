@@ -5,16 +5,17 @@
 //
 // Обьект вида
 // {
-//     sortBy -  название поля п-aо которому будет происходить сортировка [ в качестве поля для сортировки могут использоваться поля из основного обекта без вложенности ]
-//     sortDir - ask|desk по умолчанию ask направление сортировки
+//     sortBy -  название поля по которому будет происходить сортировка [ в качестве поля для сортировки могут использоваться поля из основного обекта без вложенности ]
+//     sortDir - asc|desc по умолчанию ask направление сортировки, если поле не было передано то по умолчанию идет asc
 //     searchText - поле в котором может быть текст по которому надо найти элементы в которых есть сплит элемент категория которого содержит
-//     year -  поле по которому надо найти элементы в которых есть сплит элемент содержит такое же значение в поле год
-//     month -  поле по которому надо найти элементы в которых есть сплит элемент содержит такое же значение в поле месяц
+//     startDate - начальная дата для поиска
+//     endDate -  конечная дата для поиска
+
 // }
 //
 // Функция должна возвращать массив объектов удовлетворяющих условиям объекта который описан выше, все поля в объекте
 // опциональны если нет ни каих полей в объекте надо просто вернуть не измененный массив
-// Условия для фитрации работают по принципу и (если задано несколько условий надо )
+// Условия для фильтрации работают по принципу или
 //
 //
 // Создать функцию getTotal
@@ -24,6 +25,7 @@
 //
 //
 //
+
 
 const a = [
     {
@@ -41,7 +43,7 @@ const a = [
             "history": [],
             "_id": "6332d7dbb7c876fb9a1ba62f",
             "month": 9,
-            "year": 2022,
+            "year": 2023,
             "comment": "сладкое",
             "accountName": "Даша",
             "type": "COST",
@@ -79,7 +81,7 @@ const a = [
             "history": [],
             "_id": "6332d7b5b7c876fb9a1ba62c",
             "month": 9,
-            "year": 2022,
+            "year": 2023,
             "comment": "яблоки",
             "accountName": "Даша",
             "type": "COST",
@@ -777,68 +779,23 @@ const a = [
         "__v": 0
     }];
 
-// const searchObject = {
-//     sortBy: 'category',
-//     sortDir: 'desk',
-//     searchText: "Даша",
-//     year: 2022,
-//     month: 9
-// }
-// const searchTransactions = (arr,obj) => {
-//     if (Object.keys(obj).length === 0) {
-//         return arr;
-//     }
-//     let sortFunction;
-//     if(obj.sortDir === "desk") {
-//         sortFunction = (a, b) => a.split[0][obj.sortBy].localeCompare(b.split[0][obj.sortBy]);
-//     } else {
-//         sortFunction = (a, b) => b.split[0][obj.sortBy].localeCompare(a.split[0][obj.sortBy]);
-//     }
-//     return arr.filter(item => (obj.searchText ? item.split[0].accountName === obj.searchText : true)
-//       && ((obj.year ? item.split[0].year === obj.year : true))
-//       && ((obj.month ? item.split[0].month === obj.month : true)))
-//       .sort(sortFunction)}
-// console.log (searchTransactions(a,searchObject))
-//
-// const getTotal = (arr) => {
-//     let sum = 0;
-//     arr.forEach (item => sum += item.split[0].absAmount);
-//     return sum;
-// }
-// console.log(getTotal(a))
-//
-//
-//
-//
-// //
-// const obj = {
-//     name:"Ivan",
-//     age:23,
-//     rost:170
-// }
-// const {name,age,rost}=obj;
-// console.log(name)
-//
-//
-//
-// //
-//
-// if (1 == 1) {
-//     console.log(1);
-//     console.log(2);
-// } else {
-//     console.log(3);
-//     console.log(4);
-// }
+const searchObj = {
+    sortBy: "category",
+    sortDir:"desc",
+    searchText:"Чай",
+    startDate:2022,
+    endDate:2023
+}
 
+const searchFunc = (arr, obj) => {
 
+    return arr.filter (item => (obj.searchText ? item.split[0].accountName === obj.searchText : true)
+      && ((obj.startDate ? item.split[0].year === obj.startDate : true))
+    || ((obj.endDate ? item.split[0].year === obj.endDate : true))
+      && .sort(a,b) => obj.sortBy === "desc" ? (a.split[0][obj.sortBy].localeCompare(b.split[0][obj.sortBy]) :
+      (b.split[0][obj.sortBy].localeCompare(a.split[0][obj.sortBy])
+    )
 
-1==1 ? (console.log(1) ,
-        console.log(2))
-: (console.log(3),
-  console.log(4))
+}
 
-
-
-
-
+console.log(searchFunc(a,searchObj))
