@@ -800,3 +800,9 @@ const searchTransactions = (arr,obj) => {
       .sort(sortFunction)}
 console.log (searchTransactions(a,searchObject))
 
+const getTotal = (arr) => {
+    let sum = 0;
+    arr.forEach (item => sum += item.split[0].absAmount);
+    return sum;
+}
+console.log(getTotal(a))
