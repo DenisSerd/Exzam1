@@ -23,9 +23,15 @@
 //
 //
 //
-//
-//
-//
+
+
+const searchObj = {
+  sortBy: "category",
+  sortDir: "desc",
+  searchText: "Чай",
+  startDate: "2022-01-01",
+  endDate: "2025-03-01"
+}
 const a = [
   {
     "teams": ["5fd8977aec290cace76dc08d"],
@@ -777,29 +783,33 @@ const a = [
     "updatedAt": "2022-09-26T15:57:51.295Z",
     "__v": 0
   }];
-const searchObj = {
-  sortBy: "category",
-  sortDir: "desc",
-  searchText: "Чай",
-  startDate: "2022-01-01",
-  endDate: "2025-03-01"
-}
-const searchFunc = (arr, obj) => {
+// const searchFunc = (arr, obj) => {
+//   return arr.filter(item => obj.searchText ? item.split[0].category.includes(obj.searchText) : true)
+//     .filter(item => obj.endDate && obj.startDate
+//       ? obj.startDate.slice(0, 10) <= item.split[0].createdAt.slice(0, 10)
+//       && item.split[0].createdAt.slice(0, 10) <= obj.endDate.slice(0, 10)
+//       : true).sort((a, b) =>
+//       obj.sortDir = "desc" ?
+//         a.split[0][obj.sortBy].localeCompare(b.split[0][obj.sortBy])
+//         : b.split[0][obj.sortBy].localeCompare(a.split[0][obj.sortBy])
+//     ).map(item=>item.split)
+// }
+// console.log(searchFunc(a, searchObj))
+//
+// const getTotal = (arr) => {
+//   return arr.reduce((acum,cyrrent)=> acum + cyrrent.split[0].absAmount,0);
+// }
+// console.log(getTotal(a))
+
+
+const searchFunct = (arr, obj) => {
   return arr.filter(item => obj.searchText ? item.split[0].category.includes(obj.searchText) : true)
-    .filter(item => obj.endDate && obj.startDate
-      ? obj.startDate.slice(0, 10) <= item.split[0].createdAt.slice(0, 10)
-      && item.split[0].createdAt.slice(0, 10) <= obj.endDate.slice(0, 10)
-      : true).sort((a, b) =>
-      obj.sortDir = "desc" ?
-        a.split[0][obj.sortBy].localeCompare(b.split[0][obj.sortBy])
-        : b.split[0][obj.sortBy].localeCompare(a.split[0][obj.sortBy])
-    ).map(item => item.split)
+    .filter(item => obj.endDate && obj.startDate ? obj.startDate <= item.split[0].createdAt.slice(0, 10)
+      && item.split[0].createdAt.slice(0, 10) <= obj.endDate : true)
+    .sort((a, b) => obj.sortDir === "desc" ? a.split[0][obj.sortBy].localeCompare(b.split[0][obj.sortBy])
+      : b.split[0][obj.sortBy].localeCompare(a.split[0][obj.sortBy]))
 }
-console.log(searchFunc(a, searchObj))
-const getTotal = (arr) => {
-  return arr.reduce((acum, cyrrent) => acum + cyrrent.split[0].absAmount, 0);
-}
+console.log(searchFunct(a, searchObj))
+const getTotal = (arr) => arr.reduce((acum, cyrrent) => acum + cyrrent.split[0].absAmount, 0)
 console.log(getTotal(a))
-
-
 
