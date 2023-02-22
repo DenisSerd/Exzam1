@@ -780,9 +780,6 @@ const a = [
         "updatedAt": "2022-09-26T15:57:51.295Z",
         "__v": 0
     }];
-
-
-
 const searchObj = {
     sortBy:"sortPreParser",
     sortDir:"asc",
@@ -790,15 +787,13 @@ const searchObj = {
     startDate:"2022-01-01",
     endDate:"2023-01-01"
 }
-  // && (typeof (arr[0].[obj.sortBy]) == "number")
 const searchFunct = (arr, obj) => {
-
-
     return arr.filter(item => obj.searchText ? item.split[0].category.includes(obj.searchText) :true )
       .filter(item => obj.startDate && obj.endDate ? item.split[0].createdAt.slice(0,10) >= obj.startDate
         && item.split[0].createdAt.slice(0,10) <= obj.endDate : true)
         .sort((a,b) =>  typeof arr[0].sortPreParser === "number" ? (obj.sortDir === "desc") ? (a[obj.sortBy]) - (b[obj.sortBy])
         : (b[obj.sortBy]) - (a[obj.sortBy]): false)
 }
-
 console.log(searchFunct(a,searchObj))
+const getTotal = (arr) => arr.reduce((acum, cyrrent) => acum + cyrrent.split[0].absAmount, 0)
+console.log(getTotal(a))
