@@ -795,5 +795,7 @@ const searchFunct = (arr, obj) => {
         : (b[obj.sortBy]) - (a[obj.sortBy]): false)
 }
 console.log(searchFunct(a,searchObj))
-const getTotal = (arr) => arr.reduce((acum, cyrrent) => acum + cyrrent.split[0].absAmount, 0)
-console.log(getTotal(a))
+const getTotal = (arr, search) => {
+    return searchFunct(arr, search).reduce((acum, cyrrent) => acum + cyrrent.split[0].absAmount, 0)
+}
+console.log(getTotal(a, searchObj))
