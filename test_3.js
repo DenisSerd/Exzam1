@@ -788,10 +788,10 @@ const searchObj = {
     endDate:"2023-01-01"
 }
 const searchFunct = (arr, obj) => {
-    return arr.filter(item => obj.searchText ? item.split[0].category.includes(obj.searchText) : true )
-      .filter(item => obj.startDate && obj.endDate ? item.createdAt.slice(0,10) >= obj.startDate
-        && item.createdAt.slice(0,10) <= obj.endDate : true)
-        .sort((a,b) =>  typeof arr[0][obj.sortBy] === "number" ? (obj.sortDir === "desc") ? (a[obj.sortBy]) - (b[obj.sortBy])
+    return arr.filter( item => obj.searchText ? item.split[0].category.includes(obj.searchText) : true )
+      .filter( item => obj.startDate && obj.endDate ? item.createdAt.slice(0,10) >= obj.startDate
+        && item.createdAt.slice(0,10) <= obj.endDate : true )
+        .sort((a,b) =>  typeof arr[0][obj.sortBy] === "number" || Number(arr[0][obj.sortBy]) ? (obj.sortDir === "desc") ? (a[obj.sortBy]) - (b[obj.sortBy])
         : (b[obj.sortBy]) - (a[obj.sortBy]): false)
 }
 console.log(searchFunct(a,searchObj))
