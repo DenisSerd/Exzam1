@@ -32,7 +32,7 @@
 const a = [
     {
         "teams": ["5fd8977aec290cace76dc08d"],
-        "sortPreParser": 2,
+        "sortPreParser": 1,
         "accounts": [],
         "isPlanned": false,
         "split": [{
@@ -54,7 +54,9 @@ const a = [
             "createdAt": "2022-09-27T11:00:43.247Z",
             "updatedAt": "2022-09-27T11:00:43.247Z",
             "transactionDate": "2022-09-27T11:00:43.247Z",
-            "__v": 0
+            "__v": 0,
+            "test":1
+
         }],
         "updateLog": [],
         "rules": [],
@@ -146,7 +148,7 @@ const a = [
         "updatedAt": "2022-09-27T10:57:56.332Z",
         "__v": 0
     }, {
-        "sortPreParser": 0,
+        "sortPreParser": 5,
         "accounts": [],
         "isPlanned": false,
         "split": [{
@@ -788,7 +790,7 @@ const searchObj = {
     endDate:"2023-01-01"
 }
 const searchFunct = (arr, obj) => {
-    return arr.filter( item => obj.searchText ? item.split[0].category.includes(obj.searchText) : true )
+   return arr.filter(item => obj.sortBy ? (item.split.filter(item => item.category.includes(obj.searchText))).length > 0 ? item : false : false)
       .filter( item => obj.startDate && obj.endDate ? item.createdAt.slice(0,10) >= obj.startDate
         && item.createdAt.slice(0,10) <= obj.endDate : true )
         .sort((a,b) =>  typeof arr[0][obj.sortBy] === "number" || Number(arr[0][obj.sortBy]) ? (obj.sortDir === "desc") ? (a[obj.sortBy]) - (b[obj.sortBy])
