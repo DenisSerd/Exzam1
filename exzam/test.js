@@ -24,15 +24,10 @@
 // Создать функцию getTotal
 // Которая принимает параметры аналогично функции searchTransactions
 // Только в результате функция должа возвращать сумму всех сплитов расчитаных по полю absAmount
-//
-//
-//
-//
-
 const a = [
   {
     "teams": ["5fd8977aec290cace76dc08d"],
-    "sortPreParser": '4',
+    "sortPreParser": '5',
     "accounts": [],
     "isPlanned": false,
     "split": [{
@@ -51,12 +46,10 @@ const a = [
       "type": "COST",
       "executedBy": "632c1f00b7c876fb9a1b9ab1",
       "comments": [],
-      "createdAt": "2022-09-27T11:00:43.247Z",
+      "createdAt": "2022-10-29T11:00:43.247Z",
       "updatedAt": "2022-09-27T11:00:43.247Z",
       "transactionDate": "2022-09-27T11:00:43.247Z",
-      "__v": 0,
-      "test": 1
-
+      "__v": 0
     }],
     "updateLog": [],
     "rules": [],
@@ -68,11 +61,11 @@ const a = [
     "accountName": "Даша",
     "executedBy": "632c1f00b7c876fb9a1b9ab1",
     "comments": [],
-    "createdAt": "2022-01-27T11:00:43.252Z",
+    "createdAt": "2022-09-26T11:00:43.252Z",
     "updatedAt": "2022-09-27T11:00:43.252Z",
     "__v": 0
   }, {
-    "sortPreParser": 3,
+    "sortPreParser": '10',
     "accounts": [],
     "isPlanned": false,
     "split": [{
@@ -110,7 +103,7 @@ const a = [
     "updatedAt": "2022-09-27T11:00:05.507Z",
     "__v": 0
   }, {
-    "sortPreParser": 3,
+    "sortPreParser": 0,
     "accounts": [],
     "isPlanned": false,
     "split": [{
@@ -129,7 +122,7 @@ const a = [
       "type": "COST",
       "executedBy": "632c1f00b7c876fb9a1b9ab1",
       "comments": [],
-      "createdAt": "2022-09-27T10:57:56.327Z",
+      "createdAt": "2022-09-28T10:57:56.327Z",
       "updatedAt": "2022-09-27T10:57:56.327Z",
       "transactionDate": "2022-09-27T10:57:56.327Z",
       "__v": 0
@@ -148,7 +141,7 @@ const a = [
     "updatedAt": "2022-09-27T10:57:56.332Z",
     "__v": 0
   }, {
-    "sortPreParser": 5,
+    "sortPreParser": 2,
     "accounts": [],
     "isPlanned": false,
     "split": [{
@@ -167,7 +160,7 @@ const a = [
       "type": "COST",
       "executedBy": "632c1f00b7c876fb9a1b9ab1",
       "comments": [],
-      "createdAt": "2022-09-27T10:57:12.773Z",
+      "createdAt": "2022-09-25T10:57:12.773Z",
       "updatedAt": "2022-09-27T10:57:12.773Z",
       "transactionDate": "2022-09-27T10:57:12.774Z",
       "__v": 0
@@ -782,59 +775,66 @@ const a = [
     "updatedAt": "2022-09-26T15:57:51.295Z",
     "__v": 0
   }];
+
 const searchObj = {
   sortBy: "sortPreParser",
   sortDir: "asc",
-  searchText: "Чай",
-  startDate: "2022-01-27",
+  searchText: "сладкое",
+  startDate: "2022-09-05",
   endDate: "2023-01-01"
 }
-// const searchFunct = (arr, obj) => {
-//     let sortYesOrNo = arr.filter (item => typeof item[obj.sortBy] !== "number" ? isNaN (item[obj.sortBy]) : false )
-//      return arr.filter(item => obj.searchText ? (item.split.filter(item => item.category.includes(obj.searchText))).length > 0 ? item : false : false)
-//       .filter( item => obj.startDate && obj.endDate ? Date.parse(item.createdAt) >= Date.parse(obj.startDate)
-//         && Date.parse(item.createdAt) <= Date.parse(obj.endDate) : true )
-//         .sort((a,b) =>  sortYesOrNo.length === 0 ? (obj.sortDir === "desc") ? (a[obj.sortBy]) - (b[obj.sortBy])
-//         : (b[obj.sortBy]) - (a[obj.sortBy]): false)
-// }
-// console.log(searchFunct(a,searchObj))
-// const getTotal = (arr, search) => {
-//     return searchFunct(arr, search).reduce((acum, cyrrent) => acum + Number(cyrrent.split.map(item => (item.absAmount))), 0)
-// }
-// console.log(getTotal(a, searchObj))
 
-// const funct = (arr,obj) => {
-//   let array=[];
-//   //searchText
-//   array = arr.filter(item => item.split.filter(item => item.category.includes(obj.searchText)).length);
-//   //Date
-//   array = array.filter(item => Date.parse(item.createdAt)>=Date.parse(obj.startDate) && Date.parse(item.createdAt)<=Date.parse(obj.endDate));
-//   //проверка sort на тип
-//   let sortYesOrNo = array.filter(item => typeof item[obj.sortBy] !== "number" ? isNaN(item[obj.sortBy]) : false)
-//   //sort
-//   array.sort((a,b) => sortYesOrNo.length === 0 ? obj.sortDir && obj.sortDir === "asc"
-//     ? (a[obj.sortBy]) - (b[obj.sortBy]) : (b[obj.sortBy]) - (a[obj.sortBy]) :false)
-//
-// return array
+// const funct = (arr,obj)=> {
+//   let array = [];
+//   array = arr.filter(item => item.split.filter(item => item.category.includes(obj.searchText)).length)
+//   array = array.filter(item => Date.parse(item.createdAt) >= Date.parse(obj.startDate) && Date.parse(item.createdAt) <= Date.parse(obj.endDate))
+//   let sortYesOrNo = array.filter(item => (typeof item[obj.sortBy]) !== "number" ? isNaN(item[obj.sortBy]) : false)
+//   if(sortYesOrNo.length===0 && obj.sortBy) {
+//     array.sort(obj.sortDir === "asc" ? (a,b) => a[obj.sortBy] - b[obj.sortBy]:  b[obj.sortBy] - a[obj.sortBy])
+//   }
+//   return array
 // }
 // console.log(funct(a,searchObj))
-const funct = (arr,obj)=> {
-  let array = [];
-  array = arr.filter(item => item.split.filter(item => item.category.includes(obj.searchText)).length)
+// const getTotal = (arr,obj) => funct(arr,obj).reduce((acum,current) => acum + Number(current.split.map(item => (item.absAmount))),0)
+// console.log(getTotal(a,searchObj))
+
+
+
+// const searchTransactions = (arr, obj) => {
+//   let array=[];
+//   //search text
+//   array = arr.filter(item => item.split.filter(item => item.category.includes(obj.searchText)).length)
+//   //Date
+//   array = array.filter(item=>Date.parse(item.createdAt)>=Date.parse(obj.startDate) && Date.parse(item.createdAt)<=Date.parse(obj.endDate))
+//   //Sort
+//   let sortYesOrNo = array.filter(item => typeof item[obj.sortBy] !== "number" ? isNaN(item[obj.sortBy]) : false )
+//   array.sort((a,b) => (sortYesOrNo.length === 0) ? obj.sortDir === "asc" ? a[obj.sortBy] - b[obj.sortBy] : b[obj.sortBy] - a[obj.sortBy] : false)
+//   return array
+// }
+// console.log(searchTransactions(a,searchObj))
+//
+// // const getTotal = (arr,obj) => searchTransactions(arr,obj).reduce((acum, current) => acum + Number(current.split.map(item => item.absAmount)),0)
+// // console.log(getTotal(a,searchObj))
+// const getTotal = (arr,obj) => searchTransactions(arr,obj).reduce((acum,current) => acum + Number(current.split.map(item => item.absAmount)),0)
+// console.log(getTotal(a,searchObj))
+
+const searchTransactions = (arr, obj) => {
+  let array=[];
+  //search text
+  array = arr.map(item=> item.split.filter(item => item.comment.includes(obj.searchText)))
+  console.log(arr.map(item=> item.split.filter(item => item.comment.includes(obj.searchText))).filter(item => item.length).filter(item=>item.flat( )))
+  //date
   array = array.filter(item => Date.parse(item.createdAt) >= Date.parse(obj.startDate) && Date.parse(item.createdAt) <= Date.parse(obj.endDate))
-  let sortYesOrNo = array.filter(item => (typeof item[obj.sortBy]) !== "number" ? isNaN(item[obj.sortBy]) : false)
-  if(sortYesOrNo.length===0 && obj.sortBy) {
-    array.sort(obj.sortDir === "asc" ? (a,b) => a[obj.sortBy] - b[obj.sortBy]:  b[obj.sortBy] - a[obj.sortBy])
-  }
+  //sort
+  let sortYesOrNo = array.filter(item => typeof item[obj.sortBy] !== "number" ? isNaN(item[obj.sortBy]): false)
+  array.sort((a, b) => Date.parse(b.split.map(item=> item.createdAt)) - Date.parse(a.split.map(item=>item.createdAt)))
   return array
 }
-console.log(funct(a,searchObj))
-const getTotal2 = (arr,obj) => funct(arr,obj).reduce((acum,current) => acum + Number(current.split.map(item => (item.absAmount))),0)
-console.log(getTotal2(a,searchObj))
-
-// const getTotal = (arr,obj) => funct(arr,obj).reduce((acum,current) =>acum + Number(current.split.map(item=> item.absAmount)),0)
-// console.log(getTotal(a,searchObj))
-
-// const getTotal = (arr, obj) => funct(arr, obj).reduce((acum,currentValue) => acum + Number(currentValue.split.map(item=> item.absAmount)),0)
-// console.log(getTotal(a,searchObj))
+console.log(searchTransactions(a,searchObj))
+const getTotal = (arr,obj) => {
+  return searchTransactions(arr,obj).reduce((acum,current) => {
+    return acum + Number(current.split.map(item => item.absAmount))
+  },0)
+}
+console.log(getTotal(a,searchObj))
 
